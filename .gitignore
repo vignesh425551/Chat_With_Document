@@ -1,0 +1,28 @@
+## Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+## Virtual environments
+venv/
+.venv/
+
+## Environment / secrets
+.env
+
+## Streamlit
+.streamlit/
+
+## OS / editor
+.DS_Store
+Thumbs.db
+
+## App-generated artifacts
+Chat_With_Document/doc_catalog.json
+
+## Local data (do not commit PDFs/videos)
+Data/
+

@@ -1,0 +1,16 @@
+unstructured
+langchain-unstructured
+tiktoken
+pinecone
+pypdf
+groq
+langchain
+langchain-community
+langchain-pinecone
+langchain-text-splitters
+langchain-groq
+streamlit
+python-dotenv
+sentence-transformers
+spacy
+
