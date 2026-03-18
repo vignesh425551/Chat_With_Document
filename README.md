@@ -1,3 +1,28 @@
+# Demo Outputs of this Application
+# Basic UI
+
+<img width="952" height="475" alt="Basic_UI" src="https://github.com/user-attachments/assets/71c86518-18ce-4f06-bf44-082ed91870a9" />
+
+# After Uploading New Document
+
+<img width="959" height="476" alt="After-Upload" src="https://github.com/user-attachments/assets/420f8734-9d66-4aa4-ac0c-c9686ddfd95a" />
+
+# Q/A-1
+
+<img width="959" height="473" alt="QA" src="https://github.com/user-attachments/assets/410225b6-4aa9-4de8-9fff-4e41c1291927" />
+
+# Retrieved Chunks for reference
+
+<img width="959" height="473" alt="Retrieved-Chunks" src="https://github.com/user-attachments/assets/57598913-0bc8-4e67-8977-f02bbcd26c29" />
+
+# Refernce in Document
+
+<img width="959" height="419" alt="Ref_in_Doc" src="https://github.com/user-attachments/assets/6d926e9c-776d-4461-b786-e78ddee9d78b" />
+
+# Q/A-2
+
+<img width="959" height="476" alt="QA2" src="https://github.com/user-attachments/assets/5f1c13a5-d70c-45d2-9797-2cc004a5337d" />
+
 # Vector DB RAG Chat (Pinecone + Groq + Streamlit)
 
 Streamlit app to upload documents, index them into **Pinecone**, and chat with them using **Groq** (RAG: Retrieval-Augmented Generation).  
