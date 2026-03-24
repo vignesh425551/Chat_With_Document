@@ -130,6 +130,44 @@ Open the displayed local URL in your browser.
 
 ---
 
+## Deploy on Streamlit Community Cloud
+
+### 1) Push this repository to GitHub
+
+Make sure your repo contains:
+- `requirements.txt` (root): points to `Chat_With_Document/requirements.txt`
+- `runtime.txt` (root): Python runtime
+- `packages.txt` (root): system packages for document parsing/OCR support
+
+### 2) Create the app in Streamlit Community Cloud
+
+1. Open [Streamlit Community Cloud](https://share.streamlit.io/).
+2. Click **New app**.
+3. Select your GitHub repo and branch.
+4. Set **Main file path** to:
+   - `Chat_With_Document/app.py`
+5. Click **Advanced settings** and add secrets:
+   - `PINECONE_API_KEY`
+   - `GROQ_API_KEY`
+6. Click **Deploy**.
+
+### 3) Secrets format (recommended)
+
+In Streamlit secrets, use this format:
+
+```toml
+PINECONE_API_KEY = "YOUR_PINECONE_KEY"
+GROQ_API_KEY = "YOUR_GROQ_KEY"
+```
+
+### 4) Notes for first deployment
+
+- First build can take a few minutes because it installs NLP/ML dependencies.
+- This app uses `spaCy` sentence chunking (`en_core_web_sm`). If the model is not available in cloud at runtime, the code automatically falls back to token-based chunking.
+- `doc_catalog.json` is created during runtime and is not meant to be committed.
+
+---
+
 ## How it works (architecture)
 
 ### Indexing flow (Upload → Pinecone)
