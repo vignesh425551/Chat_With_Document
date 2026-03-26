@@ -1,0 +1,24 @@
+{
+    "doc_name": "Invoice-BAI46CEW-0003.pdf",
+    "matches_count": 1,
+    "matches": [
+        {
+            "id": "ace2b86a2559d1539002c202e5bf55374a473aa74ee64f4058a6dc77b021ad77",
+            "score": 0.0,
+            "metadata": {
+                "chunk_index": 0.0,
+                "creationdate": "2026-02-24T21:21:13+00:00",
+                "creator": "",
+                "moddate": "2026-02-24T21:21:13+00:00",
+                "namespace": "global",
+                "page": 0.0,
+                "page_label": "1",
+                "producer": "",
+                "source": "/tmp/tmpae5uc_vb.pdf",
+                "source_file": "Invoice-BAI46CEW-0003.pdf",
+                "text": "Page 1 of 1\nInvoice\nInvoice number BAI46CEW\u00000003\nDate of issue February 24, 2026\nDate due February 24, 2026\nCursor\n801 West End Avenue\nNew York, New York 10025\nUnited States\n\u00001 831\u0000425\u00009504\nhi@cursor.com\nBill to\nShrinidhi M Suresha\nC V Raman Nagar\nbengalore 560093\nKarnataka\nIndia\nshrinidhi1210@gmail.com\n$2,116.59 USD due February 24, 2026\nPay online\nDescription Qty Unit price Tax Amount\nCursor Ultra\nFeb 24, 2026\u0000Feb 24, 2027\n1 $1,920.00 18% $1,920.00\n\u00a0\nUnused time on Cursor Ultra after 24 Feb 2026\nFeb 24\u0000Mar 14, 2026\n1 18% \u0000$126.28\n\u00a0\nSubtotal $1,793.72\nTotal excluding tax $1,793.72\nGST - India \u000018% on $1,793.72\u0000 $322.87\nTotal $2,116.59\nAmount due $2,116.59\u00a0USD\nAnysphere, Inc. \nUS EIN 87\u00004436547",
+                "total_pages": 1.0
+            }
+        }
+    ]
+}
