@@ -16,7 +16,7 @@ from .config import (
 )
 from .indexing import add_documents_deduped
 from .loaders import load_uploaded_files
-from .pinecone_client import init_pinecone
+from .pinecone_client import delete_index_namespace, init_pinecone
 from .qa import answer_with_context
 
 
@@ -47,14 +47,26 @@ def main():
 
     if "doc_names" not in st.session_state:
         st.session_state["doc_names"] = _load_doc_catalog()
+    if "selected_doc_name" not in st.session_state:
+        st.session_state["selected_doc_name"] = "All documents"
 
     doc_options = ["All documents"] + sorted(set(st.session_state["doc_names"]))
+    
+    # Determine index based on current state
+    try:
+        current_idx = doc_options.index(st.session_state["selected_doc_name"])
+    except (ValueError, KeyError):
+        current_idx = 0
+
     selected_doc = st.sidebar.selectbox(
         "Doc name filter",
         options=doc_options,
-        index=0,
+        index=current_idx,
         help="Select a document to limit retrieval to that file.",
+        key="doc_selectbox"
     )
+    # Sync manual changes back to our tracker
+    st.session_state["selected_doc_name"] = selected_doc
     doc_filter = "" if selected_doc == "All documents" else selected_doc
 
     uploaded_files = st.sidebar.file_uploader(
@@ -112,6 +124,10 @@ def main():
                     all_names = sorted(set(st.session_state.get("doc_names", [])) | new_names)
                     st.session_state["doc_names"] = all_names
                     _save_doc_catalog(all_names)
+                    
+                    if new_names:
+                        # Auto-shift filter to the first newly uploaded file
+                        st.session_state["selected_doc_name"] = sorted(list(new_names))[0]
 
                     init_pinecone(index_name=index_name)
                     embeddings = get_embeddings()
@@ -148,6 +164,25 @@ def main():
                 except Exception as e:
                     st.error(f"❌ Error processing documents: {str(e)}")
                     st.exception(e)
+
+        st.divider()
+        if st.button("🗑️ Clear Index", help="Delete all documents from the Pinecone index (global namespace)"):
+            try:
+                with st.spinner("Clearing index..."):
+                    # 1. Clear Pinecone namespace
+                    delete_index_namespace(index_name=index_name)
+                    # 2. Clear local catalog
+                    st.session_state["doc_names"] = []
+                    st.session_state["selected_doc_name"] = "All documents"
+                    _save_doc_catalog([])
+                    # 3. Reset session state
+                    st.session_state["vectorstore"] = None
+                    st.session_state["index_initialized"] = False
+                    st.session_state["messages"] = []
+                st.success("Index cleared successfully.")
+                st.rerun()
+            except Exception as e:
+                st.error(f"Error clearing index: {e}")
 
     st.subheader("Chat")
 

@@ -14,7 +14,7 @@ from .config import (
     RERANK_TIEBREAK_WEIGHT,
 )
 from .models import RetrievedChunk
-from .text_utils import count_tokens, keyword_score, sha256_bytes
+from .text_utils import count_tokens, keyword_score, sha256_bytes, normalize_text_for_hash
 
 
 def retrieve_with_scores(
@@ -39,8 +39,11 @@ def retrieve_with_scores(
 
     best_by_hash: Dict[str, Tuple[object, float]] = {}
     for doc, score in dense_results:
-        text = (getattr(doc, "page_content", "") or "").strip()
-        h = sha256_bytes(text.encode("utf-8", errors="ignore"))
+        text = getattr(doc, "page_content", "") or ""
+        normalized = normalize_text_for_hash(text)
+        if not normalized:
+            continue
+        h = sha256_bytes(normalized.encode("utf-8", errors="ignore"))
         if h not in best_by_hash or float(score) > float(best_by_hash[h][1]):
             best_by_hash[h] = (doc, float(score))
 

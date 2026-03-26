@@ -3,11 +3,12 @@ from typing import List
 from langchain_pinecone import Pinecone as LangchainPinecone
 
 from .config import DEFAULT_NAMESPACE
-from .text_utils import sha256_bytes
+from .text_utils import sha256_bytes, normalize_text_for_hash
 
 
 def stable_chunk_id(namespace: str, source_file: str, page: int, chunk_index: int, text: str) -> str:
-    base = f"{namespace}|{source_file}|{page}|{chunk_index}|{text}".encode("utf-8", errors="ignore")
+    norm = normalize_text_for_hash(text)
+    base = f"{namespace}|{source_file}|{page}|{chunk_index}|{norm}".encode("utf-8", errors="ignore")
     return sha256_bytes(base)
 
 

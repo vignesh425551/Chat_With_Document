@@ -1,6 +1,6 @@
 from pinecone import Pinecone, ServerlessSpec
 
-from .config import DEFAULT_INDEX_NAME, require_env
+from .config import DEFAULT_INDEX_NAME, DEFAULT_NAMESPACE, require_env
 
 
 def init_pinecone(index_name: str = DEFAULT_INDEX_NAME, dim: int = 768) -> Pinecone:
@@ -25,4 +25,15 @@ def init_pinecone(index_name: str = DEFAULT_INDEX_NAME, dim: int = 768) -> Pinec
         )
 
     return pc
+
+
+def delete_index_namespace(index_name: str = DEFAULT_INDEX_NAME, namespace: str = DEFAULT_NAMESPACE):
+    api_key = require_env("PINECONE_API_KEY")
+    pc = Pinecone(api_key=api_key)
+    index = pc.Index(index_name)
+    try:
+        index.delete(delete_all=True, namespace=namespace)
+    except Exception as e:
+        # If the namespace doesn't exist, Pinecone might error, which is fine
+        pass
 

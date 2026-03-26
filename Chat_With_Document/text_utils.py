@@ -13,6 +13,14 @@ def tokenize(text: str) -> List[str]:
     return re.findall(r"[a-zA-Z0-9]+", (text or "").lower())
 
 
+def normalize_text_for_hash(text: str) -> str:
+    # Remove null bytes and non-printable characters
+    text = "".join(ch for ch in text if ch.isprintable())
+    # Collapse whitespace and lowercase
+    text = re.sub(r"\s+", " ", text).strip().lower()
+    return text
+
+
 def keyword_score(query: str, text: str) -> float:
     q = set(tokenize(query))
     if not q:
